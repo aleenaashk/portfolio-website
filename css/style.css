@@ -1,0 +1,219 @@
+/* ============================================================
+   STYLE.CSS - Stage 2 (static layout), matched to your design
+   HOW SIZES WORK: your Canva design is ~1024 units wide, so
+   1 Canva unit = calc(100 * var(--vw)) / 1024 (= --u). Aleena SK at 213 = calc(20.8 * var(--vw)),
+   headings at 110 = calc(10.7 * var(--vw)), small text at 15 = calc(1.46 * var(--vw)). Everything
+   scales with the browser width, like your design does.
+   Positions are written in vw too (measured from your screenshots,
+   which are a 16:10 screen, so one screen height = calc(62.5 * var(--vw))).
+============================================================ */
+
+/* ---- FONT: Helvetica World. Put files in assets/fonts/ (names below) ---- */
+@font-face { font-family: "Helvetica World"; font-weight: 400; font-display: swap;
+  src: local("Helvetica World"), local("HelveticaWorld-Regular"), url("../assets/fonts/HelveticaWorld-Regular.woff2") format("woff2"); }
+@font-face { font-family: "Helvetica World"; font-weight: 700; font-display: swap;
+  src: local("Helvetica World Bold"), local("HelveticaWorld-Bold"), url("../assets/fonts/HelveticaWorld-Bold.woff2") format("woff2"); }
+
+:root {
+  --vw: min(1vw, 1.6vh);          /* ONE "design width unit": fits your 16:10 design inside ANY window (never taller than the screen) */
+  --u: calc(100 * var(--vw) / 1024);          /* 1 Canva unit */
+  --blush: #f88891;                 /* your blush colour */
+  --blush-gradient: linear-gradient(to bottom, #fff 20%, var(--blush) 90%); /* white top -> blush bottom. The 20% / 90% keep the tops of short letters (a, e, n) from fading to invisible */
+  /* Gradients for WORDS (find what.., my projects, contact, about me). The box is taller than the letters,
+     so these stops line up white with the top of the tallest letters and full blush with the baseline.
+     First % = where white starts (smaller = paler tops less hidden), second % = where full blush is reached. */
+  --blush-gradient-word: linear-gradient(to bottom, #fff 8%, var(--blush) 70%);   /* boxes with 0.2em descender padding */
+  --blush-gradient-about: linear-gradient(to bottom, #fff 10%, var(--blush) 84%); /* "about me" boxes (no padding) */
+  --text-opacity: .59;              /* big pink text opacity */
+  --glow: rgba(248, 136, 145, .2);  /* soft pink shadows */
+  --grey: #767676;                  /* small text: this grey just passes the 4.5:1 contrast rule on white */
+  --line: #e6e6e6;
+  --font: "Helvetica World", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --tracking: -.099em;              /* Canva -99: same for headings, pills, labels, nav */
+  --size-wordmark: calc(213 * var(--u));  /* aleena sk */
+  --size-heading: calc(110 * var(--u));   /* find what.., about me, my projects */
+  --size-small: max(calc(15 * var(--u)), 11px); /* pills, nav, labels (11px floor for small screens) */
+  --margin-x: calc(7.3 * var(--vw));                /* side margin used by the nav and my projects */
+}
+*, *::before, *::after { box-sizing: border-box; }
+html:not(.motion) { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: #fff; color: var(--grey); font: 400 var(--size-small)/normal var(--font); letter-spacing: var(--tracking); overflow-x: clip; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; margin: 0; padding: 0; }
+:focus-visible { outline: 3px solid #b3254d; outline-offset: 3px; }   /* strong keyboard focus ring */
+section { position: relative; }
+
+/* Real paragraphs (project descriptions): normal spacing and leading. Add class="body-text". */
+.body-text { letter-spacing: normal; line-height: normal; }
+
+/* BIG PINK TEXT: bold, tight, 59% opacity, white->blush gradient inside each box.
+   (background-clip:text paints the gradient only inside the letters.) */
+.display, .wm-letter, .fw, .about-title span {
+  font-weight: 700; line-height: 1; letter-spacing: var(--tracking);
+  background: var(--blush-gradient); -webkit-background-clip: text; background-clip: text;
+  color: transparent; opacity: var(--text-opacity);
+}
+/* FIX: with negative letter-spacing, the text box ends up narrower than the letters, and the gradient
+   (background-clip:text) is only painted INSIDE the box, so the right edge of each word gets chopped.
+   padding-right gives the box the missing width back. */
+.display, .fw, .about-title span { padding-right: .1em; }
+.display, .fw { background-image: var(--blush-gradient-word); }
+.about-title span { background-image: var(--blush-gradient-about); }
+.display { margin: 0; font-size: var(--size-heading); padding-bottom: .2em; /* room for g, y, p descenders */ }
+
+/* PILLS: all the same size in your design (~calc(14.6 * var(--vw)) x calc(4.1 * var(--vw))), text centred */
+.pill { display: inline-flex; align-items: center; justify-content: center; width: max(calc(14.58 * var(--vw)), 8.5rem); height: max(calc(4.12 * var(--vw)), 2.6rem);
+  background: #fff; border-radius: 99px; box-shadow: 0 calc(1.2 * var(--vw)) calc(3.5 * var(--vw)) var(--glow); font-size: var(--size-small); line-height: 1.4; transition: box-shadow .3s; }
+.pill:hover { box-shadow: 0 calc(1.2 * var(--vw)) calc(3.5 * var(--vw)) rgba(248, 136, 145, .4); }
+
+/* NAV: sits at the top of the page only (as in your design), not sticky */
+.site-header { position: absolute; z-index: 10; top: calc(3.4 * var(--vw)); left: 50%; width: calc(85.4 * var(--vw)); transform: translateX(-50%); }
+.nav-pill { display: flex; align-items: center; justify-content: space-between; height: max(calc(5.1 * var(--vw)), 3.4rem); padding: 0 calc(2.1 * var(--vw)); background: #fff; border-radius: calc(2.6 * var(--vw)); box-shadow: 0 calc(1.5 * var(--vw)) calc(4 * var(--vw)) var(--glow); }
+.nav-left { display: flex; gap: calc(2.5 * var(--vw)); }
+
+/* WORDMARK (hero + footer). --dx/--dy on each letter come from the HTML.
+   The `translate` property is used (not transform) so GSAP hover moves in Stage 3 won't clash. */
+.wordmark { margin: 0; display: flex; justify-content: center; font-size: var(--size-wordmark); line-height: 1; letter-spacing: 0; }
+/* FIX: each letter keeps letter-spacing 0 so its box is as wide as the letter (nothing gets clipped).
+   The tight overlap now comes from a negative margin-right instead. Change -.14em to tighten/loosen. */
+.wm-letter { display: inline-block; position: relative; left: var(--dx, 0); top: var(--dy, 0); letter-spacing: 0; margin-right: -.14em; }  /* left/top (not transform) so cursor-push animation never clashes */
+
+/* HERO (one screen = calc(62.5 * var(--vw)) tall) */
+.hero { height: calc(62.5 * var(--vw)); min-height: 30rem; }
+.hero .wordmark { position: absolute; left: 0; right: 0; top: calc(13.7 * var(--vw)); }
+.hero-role { position: absolute; left: calc(66.7 * var(--vw)); top: calc(32.2 * var(--vw)); width: calc(9 * var(--vw)); margin: 0; line-height: .9; }
+.hero-pill-resume { position: absolute; left: calc(73 * var(--vw)); top: calc(45.6 * var(--vw)); }
+.hero-pill-touch { position: absolute; left: calc(14.1 * var(--vw)); top: calc(50.6 * var(--vw)); }
+
+/* FIND: five separate word boxes, tight stacked leading. left/top = where each word sits. */
+.find { height: calc(62.5 * var(--vw)); min-height: 30rem; }
+.find-title { margin: 0; }                        /* words are positioned against the section */
+.fw { position: absolute; font-size: var(--size-heading); padding-bottom: .2em; }
+.fw1 { left: calc(35.3 * var(--vw)); top: calc(11.1 * var(--vw)); }
+.fw2 { left: calc(43.7 * var(--vw)); top: calc(17.2 * var(--vw)); }
+.fw3 { left: calc(30.6 * var(--vw)); top: calc(24.2 * var(--vw)); }
+.fw4 { left: calc(41.6 * var(--vw)); top: calc(31.2 * var(--vw)); }
+.fw5 { left: calc(35.8 * var(--vw)); top: calc(38.2 * var(--vw)); }
+.find-pill { position: absolute; }
+.p1 { left: calc(7.1 * var(--vw));  top: calc(14.8 * var(--vw)); }   /* UI/UX designer */
+.p2 { left: calc(11.6 * var(--vw)); top: calc(36.8 * var(--vw)); }   /* publication designer */
+.p3 { left: calc(70 * var(--vw));   top: calc(27.4 * var(--vw)); }   /* identity designer */
+.p4 { left: calc(76 * var(--vw));   top: calc(45.1 * var(--vw)); }   /* graphic designer */
+
+/* PROJECTS: animated in Stage 3. Overflow clipped so off-screen items never widen the page. */
+.projects { height: calc(62.5 * var(--vw)); min-height: 30rem; overflow: hidden; }
+.projects-title { position: absolute; right: var(--margin-x); top: calc(6 * var(--vw)); }
+.gallery { position: absolute; inset: 22% 0 0; }
+.proj { position: absolute; left: var(--x); top: var(--y); width: var(--w); transform: translateX(-50%); }
+.proj a { display: block; }
+.proj-label { display: block; margin-bottom: .4rem; font-size: max(calc(.9 * var(--vw)), 9px); white-space: nowrap; }
+.proj-img { display: block; aspect-ratio: 16 / 9; background: #f6eef0; border-radius: .4rem; overflow: hidden; box-shadow: 0 calc(1 * var(--vw)) calc(3 * var(--vw)) var(--glow); }
+.proj-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ABOUT: "about" and "me" are two overlapping boxes, centre-aligned. Card stack sits right. */
+.about { height: calc(70 * var(--vw)); min-height: 36rem; }
+.about-title { position: absolute; left: calc(8.2 * var(--vw)); top: calc(6.4 * var(--vw)); margin: 0; display: grid; justify-items: center; font-size: var(--size-heading); }
+.about-title span { display: block; }
+.about-title span + span { margin-top: -.635em; }   /* pulls "me" up so it overlaps "about" */
+.card-stack { position: absolute; left: calc(37.4 * var(--vw)); top: calc(18 * var(--vw)); width: calc(52.3 * var(--vw)); aspect-ratio: 1.38; }
+.card { position: absolute; inset: 0; padding: calc(2.4 * var(--vw)) calc(3.1 * var(--vw)); background: #fff; border-radius: calc(3 * var(--vw)); box-shadow: 0 calc(2 * var(--vw)) calc(6 * var(--vw)) var(--glow); }
+.card-intro { z-index: 3; overflow: hidden; }
+.card-education { z-index: 2; transform: translate(4%, -4%) rotate(1.2deg); }
+.card-experience { z-index: 1; transform: translate(8%, -8%) rotate(2.4deg); }
+.card-hi, .card-name { margin: 0; font-weight: 700; line-height: 1; background: linear-gradient(to bottom, #eee, #cacaca); -webkit-background-clip: text; background-clip: text; color: transparent; width: max-content; }
+.card-hi { font-size: calc(2.15 * var(--vw)); }
+.card-name { font-size: calc(4.96 * var(--vw)); }
+.card-portrait { position: absolute; right: calc(1.9 * var(--vw)); bottom: 0; height: 80%; width: auto; }
+.card-title { margin: 0; font-size: calc(2.3 * var(--vw)); line-height: 1; padding-right: .1em; width: max-content; background: linear-gradient(to bottom, #eee, #cacaca); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.card-education, .card-experience { display: flex; flex-direction: column; justify-content: space-between; padding-bottom: calc(3.3 * var(--vw)); }
+.rows li { display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-height: calc(6 * var(--vw)); border-top: 1px solid #d9d9d9; }
+.rows li:last-child { border-bottom: 1px solid #d9d9d9; }
+.rows b { font-weight: 700; }
+
+/* CONTACT */
+.contact { min-height: calc(50 * var(--vw)); display: grid; place-content: center; justify-items: center; gap: 2rem; text-align: center; padding: 0 var(--margin-x); }
+.contact-title { font-size: calc(80 * var(--u)); }
+
+/* FOOTER: white panel, rounded top, pink glow above. Wordmark placed like the hero. */
+.site-footer { position: relative; height: calc(49.5 * var(--vw)); min-height: 26rem; background: #fff; border-radius: calc(8 * var(--vw)) calc(8 * var(--vw)) 0 0; box-shadow: 0 calc(-1.5 * var(--vw)) calc(5 * var(--vw)) var(--glow); }
+.footer-top { display: flex; justify-content: space-between; padding: calc(5.3 * var(--vw)) calc(10.4 * var(--vw)) 0 calc(9.5 * var(--vw)); }
+.footer-top ul { display: flex; gap: calc(2.5 * var(--vw)); }
+.footer-top p { margin: 0; }
+.footer-wordmark { position: absolute; left: 0; right: 0; top: calc(13.7 * var(--vw)); }
+
+/* Narrow screens: proper responsive work comes in Stage 5 */
+@media (max-width: 700px) { .nav-left { gap: 1rem; } }
+
+/* ============================================================
+   STAGE 3 ADDITIONS
+============================================================ */
+
+/* A. LAYOUT SWITCH. JavaScript adds the class "motion" to <html> on wide screens without
+   reduced-motion. Without it (no JS, phones, reduced motion) the gallery and About cards
+   are simple readable lists. */
+html:not(.motion) .projects { height: auto; min-height: 0; overflow: visible; padding: calc(8 * var(--vw)) var(--margin-x); }
+html:not(.motion) .projects-title { position: static; margin-bottom: 2rem; }
+html:not(.motion) .gallery { position: static; display: grid; gap: 2.5rem; justify-items: start; }
+html:not(.motion) .proj { position: static; transform: none; width: min(100%, 32rem); }
+html:not(.motion) .proj-label { font-size: var(--size-small); }
+html:not(.motion) .about { height: auto; min-height: 0; padding: calc(8 * var(--vw)) var(--margin-x); }
+html:not(.motion) .about-title { position: relative; left: auto; top: auto; margin-bottom: 2rem; }
+html:not(.motion) .card-stack { position: static; width: 100%; aspect-ratio: auto; display: grid; gap: 1.5rem; }
+html:not(.motion) .card { position: relative; inset: auto; transform: none; min-height: 16rem; padding: 1.5rem; }
+html:not(.motion) .card-hi { font-size: 1.4rem; }
+html:not(.motion) .card-name { font-size: 2.6rem; }
+html:not(.motion) .card-title { font-size: 1.8rem; }
+html:not(.motion) .rows li { min-height: 3.5rem; }
+
+/* B. ANIMATED LAYOUT: GSAP does all positioning, so the CSS offsets are switched off */
+html.motion .proj { left: 0; top: 0; width: 37%; transform: none; }   /* 37% = focused size from your design */
+html.motion .card-education, html.motion .card-experience { transform: none; }
+html.motion .card-intro { z-index: 1; }     /* later cards sit on top of earlier ones */
+html.motion .card-education { z-index: 2; }
+html.motion .card-experience { z-index: 3; }
+
+/* C. PROJECT HOVER: image grows slightly, soft overlay + title fade in (also on keyboard focus).
+   The grow is on .proj-img only, so it never fights the scroll animation on the whole project. */
+.proj-img { position: relative; container-type: inline-size; transition: transform .5s cubic-bezier(.2, .7, .2, 1); }
+.proj a:hover .proj-img, .proj a:focus-visible .proj-img { transform: scale(1.04); }
+.proj-overlay { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(30, 10, 15, .28); opacity: 0; transition: opacity .4s; }
+.proj a:hover .proj-overlay, .proj a:focus-visible .proj-overlay { opacity: 1; }
+.proj-title { padding: 0 .5em; color: #fff; font-weight: 700; font-size: 9cqw; line-height: 1; text-align: center; }  /* 9cqw = 9% of the image width */
+
+/* ============================================================
+   STAGE 3b: SCENES. Each section is exactly one screen tall and its content
+   lives in a ".stage" box that keeps your 16:10 design proportions, centred.
+============================================================ */
+.hero, .find, .projects, .about, .contact { height: 100vh; min-height: 0; }
+.stage { position: relative; width: calc(100 * var(--vw)); height: calc(62.5 * var(--vw)); margin: 0 auto; }
+.site-footer { display: flex; justify-content: center; }
+.site-footer .stage { height: 100%; }
+html:not(.motion) .projects .stage, html:not(.motion) .about .stage { width: 100%; height: auto; }
+
+/* Page transition overlay (homepage -> project page) */
+.transition-overlay { position: fixed; z-index: 1000; background: #f6eef0; overflow: hidden; border-radius: .4rem; pointer-events: none; }
+.transition-overlay img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* ============================================================
+   STAGE 6: ACCESSIBILITY
+============================================================ */
+/* Skip link: hidden until a keyboard user tabs to it */
+.skip-link { position: absolute; left: 1rem; top: -5rem; z-index: 2000; padding: .8rem 1.2rem; background: #fff; color: #333; border-radius: 99px; box-shadow: 0 6px 24px var(--glow); transition: top .2s; }
+.skip-link:focus { top: 1rem; }
+
+/* Bigger click/tap areas for text links (WCAG 2.2 minimum target size) */
+.nav-pill a, .footer-top a { display: inline-block; padding: .55rem .25rem; }
+
+/* Project hover title: slightly darker overlay + shadow so the white title stays readable on any image */
+.proj-overlay { background: rgba(30, 10, 15, .4); }
+.proj-title { text-shadow: 0 1px 12px rgba(0, 0, 0, .5); }
+
+/* HIGH CONTRAST: if the visitor's device asks for more contrast, the pale pink gradient text
+   becomes a solid deep rose and small grey text gets darker. (Your normal design is untouched for everyone else.) */
+@media (prefers-contrast: more) {
+  :root { --grey: #4a4a4a; }
+  .display, .wm-letter, .fw, .about-title span { background: none; -webkit-background-clip: border-box; background-clip: border-box; color: #a82a3f; opacity: 1; }
+  .card-hi, .card-name, .card-title { background: none; -webkit-background-clip: border-box; background-clip: border-box; color: #666; }
+  .rows li { border-color: #999; }
+}

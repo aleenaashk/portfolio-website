@@ -1,0 +1,5 @@
+# Allows all search engines. REPLACE the address below with your real website address.
+User-agent: *
+Allow: /
+
+Sitemap: https://USERNAME.github.io/REPO/sitemap.xml

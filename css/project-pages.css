@@ -1,0 +1,30 @@
+/* ============================================================
+   PROJECT-PAGES.CSS - shared by every page in /projects.
+   (style.css is loaded first, so fonts, colours, pills, nav,
+   contact and footer all match the homepage automatically.)
+============================================================ */
+
+/* Project pages are long and scroll normally, so sizes follow the window WIDTH only */
+:root {
+  --vw: 1vw;
+  --content-width: calc(85.4 * var(--vw));   /* same width as the nav bar */
+  --image-gap: 0px;                          /* space between the stacked project images (your wireframe shows none). Try 2vw for a gap. */
+}
+
+/* Contact section is shorter here than on the homepage */
+body.project-page .contact { height: auto; min-height: calc(50 * var(--vw)); }
+
+/* TITLE + DESCRIPTION + TAGS */
+.project-intro { width: var(--content-width); margin: 0 auto; padding-top: calc(18.7 * var(--vw)); }
+.project-title { font-size: calc(55 * var(--u)); }                 /* 55 = half the 110 used for section headings */
+.project-desc { max-width: 76%; margin: calc(2 * var(--vw)) 0 0; font-size: calc(1.3 * var(--vw)); }
+.project-desc + .project-desc { margin-top: calc(1.2 * var(--vw)); }
+.project-tags { display: flex; flex-wrap: wrap; gap: calc(1.7 * var(--vw)); margin-top: calc(3.9 * var(--vw)); }
+
+/* IMAGES: hero image first, then the content images in one vertical stack, all the same width */
+.project-images { display: grid; gap: var(--image-gap); width: var(--content-width); margin: calc(12.7 * var(--vw)) auto calc(8 * var(--vw)); }
+/* Every image fills the width and keeps its OWN proportions, so the height varies from image to image */
+.project-img { margin: 0; overflow: hidden; }
+.project-img img, .project-img video { display: block; width: 100%; height: auto; }
+/* Until you add an image file, a pale 16:9 box holds its place (the code adds "is-placeholder" automatically) */
+.project-img.is-placeholder { aspect-ratio: 16 / 9; background: #f6eef0; }

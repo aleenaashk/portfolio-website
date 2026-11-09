@@ -1,0 +1,102 @@
+/* ============================================================
+   RESPONSIVE.CSS - loaded after style.css on every page.
+
+   HOW THE SIZES WORK
+   - Desktop / laptop / tablet LANDSCAPE: your 16:10 design is scaled to fit the
+     screen (the "stage" system), with all the scroll scenes.
+   - "COMPACT" = phones, and tablets held upright (anything narrower than 701px
+     OR taller than 4:5). The layout becomes a natural, flowing page:
+     big type, stacked sections, touch-sized buttons, no pinned scenes.
+   The compact test is written once below as a media query. Keep it identical in js/main.js.
+============================================================ */
+
+/* Hover-less devices (phones, tablets): never rely on hover */
+@media (hover: none) {
+  .proj a:hover .proj-img { transform: none; }
+  .proj-overlay { display: none; }          /* the project name is already shown above each image */
+}
+
+/* Desktop reduced-motion/no-JS lists and all screens: keep tiny text readable */
+.project-desc { font-size: max(calc(1.3 * var(--vw)), 1rem); }
+
+@media (max-width: 700px), (max-aspect-ratio: 5/4) {
+
+  /* ---------- SIZES (all follow the window width) ---------- */
+  :root {
+    --vw: 1vw;
+    --margin-x: 6vw;
+    --size-wordmark: 26vw;              /* aleena sk */
+    --size-heading: 17vw;               /* find what.., my projects, about me */
+    --size-small: max(3.4vw, 0.9rem);   /* nav, labels, pills (never under ~14px) */
+  }
+  .stage { width: 100%; height: auto; margin: 0; }
+  .hero, .find, .contact { min-height: 0; height: auto; }
+
+  /* Touch-friendly pills: big enough to tap (at least 44px tall) */
+  .pill { width: clamp(8.5rem, 38vw, 15rem); height: clamp(2.75rem, 11vw, 3.5rem); }
+
+  /* ---------- NAV: full width pill with roomy tap areas ---------- */
+  .site-header { top: 4vw; left: 4vw; right: 4vw; width: auto; transform: none; }
+  .nav-pill { height: 3.4rem; padding: 0 5vw; border-radius: 1.2rem; }
+  .nav-left { gap: 4vw; }
+  .nav-pill a { display: inline-block; padding: 0.9rem 0.15rem; }
+
+  /* ---------- HERO: big name on top, pills near the bottom ---------- */
+  .hero .stage { height: 100svh; min-height: 34rem; }
+  .hero .wordmark { top: 30vw; }
+  .hero-role { left: auto; right: 6vw; top: calc(30vw + var(--size-wordmark) * 0.95); width: 34vw; }
+  .hero-pill-resume { left: auto; right: 6vw; top: auto; bottom: 40vw; }
+  .hero-pill-touch { left: 6vw; top: auto; bottom: 22vw; }
+
+  /* ---------- FIND: words stack with the same tight leading; pills sit underneath ---------- */
+  .find .stage { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; padding: 22vw 6vw 16vw; }
+  .find-title { flex: 0 0 100%; margin-bottom: 8vw; }
+  .fw { position: static; display: block; width: max-content; }
+  .fw + .fw { margin-top: -0.36em; }                  /* pulls each word up into the one above (tight leading) */
+  .fw1 { margin-left: 7vw; } .fw2 { margin-left: 21vw; } .fw3 { margin-left: 0; } .fw4 { margin-left: 18vw; } .fw5 { margin-left: 8vw; }
+  .find-pill { position: static; }
+  .p1, .p2, .p3, .p4 { left: auto; right: auto; top: auto; }
+  .p2 { margin-left: 8vw; } .p4 { margin-left: 8vw; }
+
+  /* ---------- PROJECTS: a simple vertical list; every project is a big tap target ---------- */
+  html:not(.motion) .gallery { gap: 3rem; }
+  html:not(.motion) .proj { width: min(88%, 32rem); }
+  html:not(.motion) .proj:nth-child(even) { justify-self: end; }         /* alternate left/right to keep the asymmetric feel */
+
+  /* ---------- ABOUT: the three cards pile up like paper as you scroll (pure CSS "sticky") ---------- */
+  html:not(.motion) .card-stack { display: block; padding-bottom: 8vh; }
+  html:not(.motion) .card { position: sticky; margin-bottom: 14vh; min-height: 22rem; }
+  .card-intro { top: 6.5rem; z-index: 1; }
+  .card-education { top: 8rem; z-index: 2; }
+  .card-experience { top: 9.5rem; z-index: 3; }
+  .card-portrait { height: 70%; }
+  html:not(.motion) .rows li { min-height: 3.6rem; }
+  .card-title { padding-bottom: 1rem; }
+
+  /* ---------- CONTACT ---------- */
+  .contact { min-height: 70svh; padding: 14vw 6vw; }
+  .contact-title { font-size: 14vw; }
+
+  /* ---------- FOOTER: links, then copyright, then the big name ---------- */
+  .site-footer { height: auto; min-height: 0; border-radius: 2rem 2rem 0 0; display: block; }
+  .site-footer .stage { height: auto; }
+  .footer-top { flex-direction: column; gap: 1rem; padding: 8vw 6vw 0; }
+  .footer-top ul { flex-wrap: wrap; gap: 1rem 5vw; }
+  .footer-top a { display: inline-block; padding: 0.6rem 0.2rem; }
+  .footer-wordmark { position: static; padding: 10vw 0 6vw; }
+
+  /* ---------- PROJECT PAGES ---------- */
+  :root { --content-width: 88vw; }
+  .project-intro { padding-top: 30vw; }
+  .project-title { font-size: 13vw; }
+  .project-desc { max-width: 100%; margin-top: 5vw; }
+  .project-tags { margin-top: 6vw; gap: 3vw; }
+  .project-images { margin: 14vw auto 10vw; }
+  body.project-page .contact { min-height: 60svh; }
+}
+
+/* No-motion people on phones: the cards sit in a plain list (nothing sticks) */
+@media ((max-width: 700px) or (max-aspect-ratio: 5/4)) and (prefers-reduced-motion: reduce) {
+  html:not(.motion) .card { position: relative; top: auto; margin-bottom: 1.5rem; }
+  html:not(.motion) .card-stack { padding-bottom: 0; }
+}

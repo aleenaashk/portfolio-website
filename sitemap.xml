@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- REPLACE https://USERNAME.github.io/REPO with your real website address. Add a <url> block for every new project page. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://USERNAME.github.io/REPO/</loc></url>
+  <url><loc>https://USERNAME.github.io/REPO/projects/graduation-showcase.html</loc></url>
+  <url><loc>https://USERNAME.github.io/REPO/projects/apple-health.html</loc></url>
+  <url><loc>https://USERNAME.github.io/REPO/projects/manglish-keyboard.html</loc></url>
+  <url><loc>https://USERNAME.github.io/REPO/projects/ezhakal.html</loc></url>
+  <url><loc>https://USERNAME.github.io/REPO/projects/punk-decoded.html</loc></url>
+</urlset>

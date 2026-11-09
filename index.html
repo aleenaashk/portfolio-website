@@ -1,0 +1,186 @@
+<!doctype html>
+<!-- ============================================================
+  ALEENA SK PORTFOLIO - HOMEPAGE (STAGE 2: STATIC LAYOUT)
+  This stage has NO animation yet. It only sets up the layout so
+  we can compare it with your wireframes. Motion comes in Stage 3.
+  Sections in order: header/nav, hero, find, projects, about,
+  contact, footer.
+============================================================ -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aleena SK | UI/UX &amp; Graphic Designer</title>
+  <!-- PLACEHOLDER: replace with your own description -->
+  <meta name="description" content="Portfolio of Aleena SK, a UI/UX and graphic designer working across interface, publication and identity design.">
+  <!-- Font: Helvetica World is loaded in css/style.css (see @font-face there) -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/contact-overlay.css">
+  <!-- SEO: REPLACE https://USERNAME.github.io/REPO with your real website address everywhere you see it -->
+  <link rel="canonical" href="https://USERNAME.github.io/REPO/">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml"><!-- PLACEHOLDER icon: replace the file -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Aleena SK">
+  <meta property="og:title" content="Aleena SK | UI/UX &amp; Graphic Designer">
+  <meta property="og:description" content="Portfolio of Aleena SK, a UI/UX and graphic designer working across interface, publication and identity design.">
+  <meta property="og:url" content="https://USERNAME.github.io/REPO/">
+  <meta property="og:image" content="https://USERNAME.github.io/REPO/assets/images/og-image.jpg"><!-- PLACEHOLDER: add a 1200x630 image at assets/images/og-image.jpg -->
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Person","name":"Aleena SK","jobTitle":"UI/UX & Graphic Designer","url":"https://USERNAME.github.io/REPO/"}
+  </script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+
+<!-- NAVIGATION: floating pill. Edit link destinations here. -->
+<header class="site-header">
+  <nav class="nav-pill" aria-label="Main">
+    <ul class="nav-left">
+      <li><a href="#about">about me</a></li>
+      <li><a href="#projects">portfolio</a></li>
+      <!-- PLACEHOLDER: put your resume PDF at assets/resume.pdf -->
+      <li><a href="assets/resume.pdf">resume</a></li>
+    </ul>
+    <a href="#contact" data-open-contact>contact me</a>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- 1. HERO -->
+<section class="hero" aria-labelledby="hero-name">
+<div class="stage">
+  <!-- Each letter is its own span so Stage 3 can move it on hover.
+       --dx / --dy = how far (in em) the letter is nudged sideways / up-down from its natural spot.
+       These values were measured from your design. Change them to reshape the word. -->
+  <h1 id="hero-name" class="wordmark" aria-label="aleena sk">
+    <span class="wm-letter" aria-hidden="true" style="--dx:0em;--dy:0em">a</span><span class="wm-letter" aria-hidden="true" style="--dx:0.02em;--dy:-0.1em">l</span><span class="wm-letter" aria-hidden="true" style="--dx:0.06em;--dy:0em">e</span><span class="wm-letter" aria-hidden="true" style="--dx:0em;--dy:-0.16em">e</span><span class="wm-letter" aria-hidden="true" style="--dx:0em;--dy:0.075em">n</span><span class="wm-letter" aria-hidden="true" style="--dx:-0.055em;--dy:0.134em">a</span><span class="wm-letter" aria-hidden="true" style="--dx:0.04em;--dy:-0.077em">s</span><span class="wm-letter" aria-hidden="true" style="--dx:0em;--dy:0em">k</span>
+  </h1>
+  <p class="hero-role">UI/UX &amp; graphic designer</p>
+  <a class="pill hero-pill-resume" href="assets/resume.pdf" aria-label="Resume (PDF)">resume</a>
+  <a class="pill hero-pill-touch" href="mailto:aleenaashk@gmail.com" data-open-contact>get in touch</a><!-- opens the contact popup; the mailto: is only the no-JavaScript fallback -->
+</div>
+</section>
+
+<!-- 2. FIND WHAT YOU'RE LOOKING FOR -->
+<section class="find" aria-labelledby="find-title">
+<div class="stage">
+  <h2 id="find-title" class="find-title" aria-label="find what you're looking for">
+    <!-- 5 separate boxes so every word gets the SAME white-to-blush gradient (like your 5 Canva text boxes) -->
+    <span class="fw fw1" aria-hidden="true">find</span>
+    <span class="fw fw2" aria-hidden="true">what</span>
+    <span class="fw fw3" aria-hidden="true">you&rsquo;re</span>
+    <span class="fw fw4" aria-hidden="true">looking</span>
+    <span class="fw fw5" aria-hidden="true">for</span>
+  </h2>
+  <a class="pill find-pill p1" href="#projects" aria-label="UI/UX designer, see portfolio">UI/UX designer</a>
+  <a class="pill find-pill p2" href="#projects" aria-label="publication designer, see portfolio">publication designer</a>
+  <a class="pill find-pill p3" href="#projects" aria-label="identity designer, see portfolio">identity designer</a>
+  <a class="pill find-pill p4" href="#projects" aria-label="graphic designer, see portfolio">graphic designer</a>
+</div>
+</section>
+
+<!-- 3. PROJECTS (static: shows carousel frame 1 positions) -->
+<section class="projects" id="projects" aria-labelledby="projects-title">
+<div class="stage">
+  <h2 id="projects-title" class="display projects-title">my projects</h2>
+  <ul class="gallery">
+    <!-- Per-project position: --x = centre (% of width), --y = top (%), --w = width (% of width).
+         These are the frame-1 values from the plan. Stage 3 animates them.
+         IMAGE PLACEHOLDERS: put each image in assets/images/ with the file name shown. -->
+    <li class="proj" style="--x:50%;--y:34%;--w:37%">
+      <a href="projects/graduation-showcase.html" aria-label="Graduation Showcase, publication design: view project"><span class="proj-label">Graduation Showcase  |  Identity Design</span>
+      <span class="proj-img"><img src="assets/images/graduation-showcase-cover.png" loading="lazy" decoding="async" alt="Graduation Showcase cover" onerror="this.remove()"></span></a>
+    </li>
+    <li class="proj" style="--x:87%;--y:6%;--w:18%">
+      <a href="projects/apple-health.html" aria-label="Apple Health, UI/UX design: view project"><span class="proj-label">Apple Health  |  UI/UX Design</span>
+      <span class="proj-img"><img src="assets/images/apple-health-cover.png" loading="lazy" decoding="async" alt="Apple Health cover" onerror="this.remove()"></span></a>
+    </li>
+    <li class="proj" style="--x:97%;--y:52%;--w:18%">
+      <a href="projects/manglish-keyboard.html" aria-label="Manglish Keyboard, UI/UX design: view project"><span class="proj-label">Manglish Keyboard  |  UI/UX Design</span>
+      <span class="proj-img"><img src="assets/images/manglish-keyboard-cover.png" loading="lazy" decoding="async" alt="Manglish Keyboard cover" onerror="this.remove()"></span></a>
+    </li>
+    <li class="proj" style="--x:118%;--y:12%;--w:18%">
+      <a href="projects/ezhakal.html" aria-label="Ezhakal, publication design: view project"><span class="proj-label">Ezhakal  |  Publication Design</span>
+      <span class="proj-img"><img src="assets/images/ezhakal-cover.png" loading="lazy" decoding="async" alt="Ezhakal cover" onerror="this.remove()"></span></a>
+    </li>
+    <li class="proj" style="--x:135%;--y:58%;--w:14%">
+      <a href="projects/punk-decoded.html" aria-label="Punk Decoded, publication design: view project"><span class="proj-label">Punk Decoded  |  Publication Design</span>
+      <span class="proj-img"><img src="assets/images/punk-decoded-cover.png" loading="lazy" decoding="async" alt="Punk Decoded cover" onerror="this.remove()"></span></a>
+    </li>
+  </ul>
+</div>
+</section>
+
+<!-- 4. ABOUT: ONE section, THREE stacked cards -->
+<section class="about" id="about" aria-labelledby="about-title">
+<div class="stage">
+  <h2 id="about-title" class="about-title" aria-label="about me"><span aria-hidden="true">about</span><span aria-hidden="true">me</span></h2>
+  <div class="card-stack">
+    <article class="card card-intro">
+      <p class="card-hi">Hi! I&rsquo;m</p>
+      <p class="card-name">Aleena SK</p>
+      <!-- IMAGE PLACEHOLDER: your portrait at assets/images/aleena-portrait.png (transparent background works best) -->
+      <img class="card-portrait" loading="lazy" decoding="async" src="assets/images/aleena-portrait.png" alt="Portrait of Aleena SK" onerror="this.remove()">
+    </article>
+    <article class="card card-education">
+      <h3 class="card-title">Education</h3>
+      <ul class="rows">
+        <li><span>National Institute of Fashion Technology</span><span>2023 - 2027</span></li>
+        <li><span>Naipunnya Public School</span><span>2015 - 2022</span></li>
+      </ul>
+    </article>
+    <article class="card card-experience">
+      <h3 class="card-title">Experience</h3>
+      <ul class="rows">
+        <li><span><b>UI/UX Design Intern</b><br>Tukxi India Private Limited</span><span>JUN 2026<br>JUL 2026</span></li>
+        <li><span><b>UX Research Intern</b><br>ClusterDev Technologies Private Limited</span><span>JUN 2025<br>JUL 2025</span></li>
+      </ul>
+    </article>
+  </div>
+</div>
+</section>
+
+<!-- 5. CONTACT CTA (button gets its scroll reveal in Stage 3) -->
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <h2 id="contact-title" class="display contact-title">have any projects in mind?</h2>
+  <a class="pill" href="mailto:aleenaashk@gmail.com" data-open-contact>get in touch</a><!-- opens the contact popup; the mailto: is only the no-JavaScript fallback -->
+</section>
+
+</main>
+
+<!-- 6. FOOTER -->
+<footer class="site-footer">
+<div class="stage">
+  <div class="footer-top">
+    <nav aria-label="Footer"><ul>
+      <li><a href="#about">about me</a></li>
+      <li><a href="#projects">portfolio</a></li>
+      <li><a href="assets/resume.pdf">resume</a></li>
+      <li><a href="#contact" data-open-contact>contact me</a></li>
+    </ul></nav>
+    <p>&copy; 2026 Aleena SK. All rights reserved.</p>
+  </div>
+  <p class="wordmark footer-wordmark" role="img" aria-label="aleena sk">
+    <span class="wm-letter" aria-hidden="true" style="--dx:0em;--dy:0em">a</span><span class="wm-letter" aria-hidden="true" style="--dx:0.02em;--dy:-0.1em">l</span><span class="wm-letter" aria-hidden="true" style="--dx:0.06em;--dy:0em">e</span><span class="wm-letter" aria-hidden="true" style="--dx:0em;--dy:-0.16em">e</span><span class="wm-letter" aria-hidden="true" style="--dx:0em;--dy:0.075em">n</span><span class="wm-letter" aria-hidden="true" style="--dx:-0.055em;--dy:0.134em">a</span><span class="wm-letter" aria-hidden="true" style="--dx:0.04em;--dy:-0.077em">s</span><span class="wm-letter" aria-hidden="true" style="--dx:0em;--dy:0em">k</span>
+  </p>
+</div>
+</footer>
+
+<!-- Scripts: GSAP + ScrollTrigger from a CDN, then ours (order matters) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="js/config.js" defer></script>
+<script src="js/contact-overlay.js" defer></script>
+<script src="js/interactions.js" defer></script>
+<script src="js/scroll-animations.js" defer></script>
+<script src="js/projects-gallery.js" defer></script>
+<script src="js/page-transitions.js" defer></script>
+<script src="js/main.js" defer></script>
+
+</body>
+</html>
