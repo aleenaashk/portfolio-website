@@ -35,3 +35,8 @@ aleenask-portfolio/
 - `contact` (no suffix) is ONLY the "have any projects in mind?" section.
 - Each `js/` file exposes `initSomething()` functions, started from `main.js` or `project-page.js`.
 - Script order on every page: gsap, ScrollTrigger, config.js, contact-overlay.js, then the rest.
+
+## Updating the live site
+- Upload ALL code files (index.html, css/, js/, projects/). The phone layout needs them together.
+- Every css/js link ends in `?v=20261110a`. This forces phones and browsers to fetch the new file instead of an old cached copy.
+  Next time you change code, find/replace `20261110a` with a new value (e.g. `20261110b`) in index.html and all pages in projects/.

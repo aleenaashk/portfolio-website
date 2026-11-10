@@ -10,6 +10,9 @@
    The compact test is written once below as a media query. Keep it identical in js/main.js.
 ============================================================ */
 
+/* On desktop the role text is one line; the break only exists on phones */
+.hero-role .role-break { display: none; }
+
 /* Hover-less devices (phones, tablets): never rely on hover */
 @media (hover: none) {
   /* Dragging a finger over the big letters and pills must not start text selection or the iOS callout */
@@ -28,7 +31,9 @@
     --vw: 1vw;
     --margin-x: 6vw;
     --size-wordmark: 27vw;              /* aleena sk (fills ~92% of the screen width) */
-    --size-heading: 15vw;               /* find what.., my projects, about me */
+    --size-heading: 16vw;               /* find what.., my projects, about me */
+    --size-contact: 10.5vw;             /* "have any projects in mind?" (each of its two lines) */
+    --size-project-title: 11vw;         /* title on each project page */
     --size-small: max(3.7vw, 0.95rem);  /* nav, labels, pills, small text (never under ~15px) */
   }
   .stage { width: 100%; height: auto; margin: 0; }
@@ -47,7 +52,8 @@
      Everything is positioned from the screen height (svh) and width (vw), so it fits any phone. ---------- */
   .hero .stage { height: 100svh; min-height: 34rem; }
   .hero .wordmark { top: calc(36svh - var(--size-wordmark) * 0.5); padding-right: .13em; }   /* padding-right re-centres the name (the tight letter overlap shifts it right) */
-  .hero-role { left: auto; right: 7vw; width: auto; white-space: nowrap; top: calc(36svh + var(--size-wordmark) * 0.46); }   /* tucked under the name, right side, like desktop */
+  .hero-role { left: 57vw; right: auto; width: 38vw; white-space: normal; text-align: left; top: calc(36svh + var(--size-wordmark) * 0.46); }   /* two lines (UI/UX & / graphic designer), tucked under the name's right side like desktop */
+  .hero-role .role-break { display: inline; }
   .hero-pill-resume { left: auto; right: 7vw; top: 62svh; }
   .hero-pill-touch { left: 7vw; top: 72svh; }
 
@@ -57,18 +63,20 @@
   /* ---------- FIND: the five words keep the desktop's tight stacking and stagger.
      Each word's left/top come from "em" steps measured on the desktop, so it scales with --size-heading. ---------- */
   .find { height: auto; min-height: 100svh; display: flex; align-items: center; }
-  .find .stage { height: 108vw; }
+  .find .stage { height: 152vw; }
+  .find-title { font-size: 19vw; }   /* the five words take up most of the screen, like desktop */
   .fw { padding-bottom: .2em; }
-  .fw1 { left: calc(7vw + .44em); top: 22vw; }
-  .fw2 { left: calc(7vw + 1.22em); top: calc(22vw + .655em); }
-  .fw3 { left: 7vw; top: calc(22vw + 1.31em); }
-  .fw4 { left: calc(7vw + 1.03em); top: calc(22vw + 1.965em); }
-  .fw5 { left: calc(7vw + .49em); top: calc(22vw + 2.62em); }
+  /* The block of words is centred on the screen: 2.02em is half the block's width, measured on desktop. */
+  .fw1 { left: calc(50vw - 2.02em + .44em); top: 40vw; }
+  .fw2 { left: calc(50vw - 2.02em + 1.22em); top: calc(40vw + .655em); }
+  .fw3 { left: calc(50vw - 2.02em); top: calc(40vw + 1.31em); }
+  .fw4 { left: calc(50vw - 2.02em + 1.03em); top: calc(40vw + 1.965em); }
+  .fw5 { left: calc(50vw - 2.02em + .49em); top: calc(40vw + 2.62em); }
   .find-pill { position: absolute; }
-  .p1 { left: 7vw;  top: 8vw; }      /* UI/UX designer: above, left */
-  .p2 { left: 14vw; top: 84vw; }     /* publication designer: below, left */
-  .p3 { left: 60vw; top: 40vw; }     /* identity designer: right of the words */
-  .p4 { left: 60vw; top: 92vw; }     /* graphic designer: below, right */
+  .p1 { left: 8vw;  top: 4vw; }      /* UI/UX designer: above, left */
+  .p2 { left: 56vw; top: 18vw; }     /* publication designer: above, right (staggered lower) */
+  .p3 { left: 8vw;  top: 124vw; }    /* identity designer: below, left */
+  .p4 { left: 56vw; top: 137vw; }    /* graphic designer: below, right (staggered lower) */
 
   /* ---------- PROJECTS: a simple vertical list; every project is a big tap target ---------- */
   html:not(.motion) .gallery { gap: 3rem; }
@@ -111,7 +119,7 @@
   /* ---------- CONTACT: "have any projects in mind?" is cut into two lines. Each line is its own box
      (.ct-line), so each gets the same white-to-blush gradient, like the words in "find what you're looking for". ---------- */
   .contact { min-height: 70svh; padding: 14vw 6vw; }
-  .contact-title { font-size: 10.5vw; background: none; display: grid; justify-items: center; }
+  .contact-title { font-size: var(--size-contact); background: none; display: grid; justify-items: center; }
   .contact-title .ct-line { display: block; width: max-content; padding: 0 .1em .2em 0; background: var(--blush-gradient-word); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .contact-title .ct-line + .ct-line { margin-top: -.2em; }
 
@@ -127,7 +135,7 @@
   /* ---------- PROJECT PAGES ---------- */
   :root { --content-width: 88vw; }
   .project-intro { padding-top: 30vw; }
-  .project-title { font-size: 13vw; }
+  .project-title { font-size: var(--size-project-title); }
   .project-desc { max-width: 100%; margin-top: 5vw; }
   .project-tags { margin-top: 6vw; gap: 3vw; }
   .project-images { margin: 14vw auto 10vw; }
