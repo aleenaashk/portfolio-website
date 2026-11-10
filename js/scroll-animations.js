@@ -97,7 +97,7 @@ function initFooterEntrance() {
    To reveal something else, add its CSS selector to the list. Bigger number = rises from further down. */
 function initSimpleReveals() {
   const reveals = [
-    [".find-title .fw", 60], [".find-pill", 80], [".projects-title", 40], [".proj", 14],
+    [".projects-title", 40], [".proj", 14],
     [".about-title span", 60], [".contact-title", 40], [".contact .pill", 80],
     [".footer-top", 30], [".footer-wordmark", 20],
   ];

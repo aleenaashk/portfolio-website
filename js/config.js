@@ -12,6 +12,14 @@ window.PORTFOLIO_CONFIG = {
   repulsion: {
     letters: { radius: 260, strength: 34, duration: 0.8 },  // aleena sk (hero + footer)
     pills:   { radius: 160, strength: 22, duration: 0.7 },  // hero + "find" pills
+    /* On phones/tablets (finger instead of mouse): same idea, tuned for a small screen.
+       Dragging a finger near a letter or pill pushes it away; it eases home when you lift your finger.
+       A pill you touch DOWN on is never pushed, so tapping a button always works. */
+    touch: {
+      letters: { radius: 120, strength: 28, duration: 0.8 },
+      pills:   { radius: 95,  strength: 20, duration: 0.7 },
+      dragStart: 8,    // pixels the finger must move before anything is pushed (so a tap is never a push)
+    },
   },
 
   /* Projects gallery */
@@ -35,6 +43,24 @@ window.PORTFOLIO_CONFIG = {
       farLeft:  { x: -25, w: 15 },  // ...or off-screen left
       /* Vertical position (% of gallery height). Odd/even projects alternate high/low like your frames. */
       yFocused: 34, yHigh: 6, yLow: 52,
+    },
+    /* PHONES: the same idea in portrait. The focused project is wide; neighbours peek in from the edges.
+       focusedWidth must equal the width of "html.motion .proj" inside the phone block of css/responsive.css. */
+    portrait: {
+      scrollPerProject: 0.8,
+      layout: {
+        focusedWidth: 74,
+        positions: {
+          "0":  { x: 50,  w: 74 },
+          "1":  { x: 104, w: 34 },
+          "2":  { x: 128, w: 28 },
+          "-1": { x: -4,  w: 34 },
+          "-2": { x: -28, w: 28 },
+        },
+        farRight: { x: 140, w: 28 },
+        farLeft:  { x: -40, w: 28 },
+        yFocused: 27, yHigh: 4, yLow: 66,
+      },
     },
   },
 

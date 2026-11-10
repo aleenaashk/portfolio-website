@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // KEEP this query in step with the "compact" media query in css/responsive.css.
   mm.add("(max-width: 700px) and (prefers-reduced-motion: no-preference), (max-aspect-ratio: 5/4) and (prefers-reduced-motion: no-preference)", () => {
     initHeroEntrance();
+    initFindEntrance();   // same word-by-word rise as desktop
     initSimpleReveals();
   });
 

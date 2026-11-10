@@ -25,15 +25,15 @@
   :root {
     --vw: 1vw;
     --margin-x: 6vw;
-    --size-wordmark: 26vw;              /* aleena sk */
-    --size-heading: 17vw;               /* find what.., my projects, about me */
-    --size-small: max(3.4vw, 0.9rem);   /* nav, labels, pills (never under ~14px) */
+    --size-wordmark: 27vw;              /* aleena sk (fills ~92% of the screen width) */
+    --size-heading: 15vw;               /* find what.., my projects, about me */
+    --size-small: max(3.7vw, 0.95rem);  /* nav, labels, pills, small text (never under ~15px) */
   }
   .stage { width: 100%; height: auto; margin: 0; }
-  .hero, .find, .contact { min-height: 0; height: auto; }
+  .hero, .contact { min-height: 0; height: auto; }
 
   /* Touch-friendly pills: big enough to tap (at least 44px tall) */
-  .pill { width: clamp(8.5rem, 38vw, 15rem); height: clamp(2.75rem, 11vw, 3.5rem); }
+  .pill { width: clamp(8.5rem, 36vw, 15rem); height: clamp(2.75rem, 11vw, 3.5rem); }
 
   /* ---------- NAV: full width pill with roomy tap areas ---------- */
   .site-header { top: 4vw; left: 4vw; right: 4vw; width: auto; transform: none; }
@@ -41,22 +41,29 @@
   .nav-left { gap: 4vw; }
   .nav-pill a { display: inline-block; padding: 0.9rem 0.15rem; }
 
-  /* ---------- HERO: big name on top, pills near the bottom ---------- */
+  /* ---------- HERO: same composition as desktop, in portrait.
+     Everything is positioned from the screen height (svh) and width (vw), so it fits any phone. ---------- */
   .hero .stage { height: 100svh; min-height: 34rem; }
-  .hero .wordmark { top: 30vw; }
-  .hero-role { left: auto; right: 6vw; top: calc(30vw + var(--size-wordmark) * 0.95); width: 34vw; }
-  .hero-pill-resume { left: auto; right: 6vw; top: auto; bottom: 40vw; }
-  .hero-pill-touch { left: 6vw; top: auto; bottom: 22vw; }
+  .hero .wordmark { top: calc(36svh - var(--size-wordmark) * 0.5); padding-right: .13em; }   /* padding-right re-centres the name (the tight letter overlap shifts it right) */
+  .hero-role { left: auto; right: 7vw; width: auto; white-space: nowrap; top: calc(36svh + var(--size-wordmark) * 0.46); }   /* tucked under the name, right side, like desktop */
+  .hero-pill-resume { left: auto; right: 7vw; top: 62svh; }
+  .hero-pill-touch { left: 7vw; top: 72svh; }
 
-  /* ---------- FIND: words stack with the same tight leading; pills sit underneath ---------- */
-  .find .stage { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; padding: 22vw 6vw 16vw; }
-  .find-title { flex: 0 0 100%; margin-bottom: 8vw; }
-  .fw { position: static; display: block; width: max-content; }
-  .fw + .fw { margin-top: -0.36em; }                  /* pulls each word up into the one above (tight leading) */
-  .fw1 { margin-left: 7vw; } .fw2 { margin-left: 21vw; } .fw3 { margin-left: 0; } .fw4 { margin-left: 18vw; } .fw5 { margin-left: 8vw; }
-  .find-pill { position: static; }
-  .p1, .p2, .p3, .p4 { left: auto; right: auto; top: auto; }
-  .p2 { margin-left: 8vw; } .p4 { margin-left: 8vw; }
+  /* ---------- FIND: the five words keep the desktop's tight stacking and stagger.
+     Each word's left/top come from "em" steps measured on the desktop, so it scales with --size-heading. ---------- */
+  .find { height: auto; min-height: 100svh; display: flex; align-items: center; }
+  .find .stage { height: 108vw; }
+  .fw { padding-bottom: .2em; }
+  .fw1 { left: calc(7vw + .44em); top: 22vw; }
+  .fw2 { left: calc(7vw + 1.22em); top: calc(22vw + .655em); }
+  .fw3 { left: 7vw; top: calc(22vw + 1.31em); }
+  .fw4 { left: calc(7vw + 1.03em); top: calc(22vw + 1.965em); }
+  .fw5 { left: calc(7vw + .49em); top: calc(22vw + 2.62em); }
+  .find-pill { position: absolute; }
+  .p1 { left: 7vw;  top: 8vw; }      /* UI/UX designer: above, left */
+  .p2 { left: 14vw; top: 84vw; }     /* publication designer: below, left */
+  .p3 { left: 60vw; top: 40vw; }     /* identity designer: right of the words */
+  .p4 { left: 60vw; top: 92vw; }     /* graphic designer: below, right */
 
   /* ---------- PROJECTS: a simple vertical list; every project is a big tap target ---------- */
   html:not(.motion) .gallery { gap: 3rem; }
