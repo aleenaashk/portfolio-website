@@ -43,8 +43,9 @@ function initProjectsEntrance() {
 }
 
 /* ABOUT: entrance, then ONE pinned section where the three cards stack as you scroll */
-function initAboutCards() {
-  const A = window.PORTFOLIO_CONFIG.about;
+function initAboutCards(opts) {
+  // opts (phones) can override settings such as back1 / back2 (see config.js -> about.portrait)
+  const A = Object.assign({}, window.PORTFOLIO_CONFIG.about, opts);
   const intro = document.querySelector(".card-intro");
   const edu = document.querySelector(".card-education");
   const exp = document.querySelector(".card-experience");

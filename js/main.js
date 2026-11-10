@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initFindEntrance();   // same word-by-word rise as desktop
     initProjectsGallery(window.PORTFOLIO_CONFIG.gallery.portrait);
     initProjectsEntrance();
-    initAboutCards();
+    initAboutCards(window.PORTFOLIO_CONFIG.about.portrait);
     initContactEntrance();
     initFooterEntrance();
     initProjectLinkTransition();

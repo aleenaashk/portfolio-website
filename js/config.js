@@ -72,6 +72,11 @@ window.PORTFOLIO_CONFIG = {
     enterFromPercent: 40,                 // new cards slide up from this far below (% of card height)
     back1: { x: 4.4, y: -4.8, rot: 3 },   // card one step behind the front
     back2: { x: 9.0, y: -9.9, rot: 6 },   // card two steps behind the front
+    /* PHONES: the front card is centred, so the cards behind peek out less */
+    portrait: {
+      back1: { x: 3.5, y: -4.5, rot: 2.5 },
+      back2: { x: 7.0, y: -9.0, rot: 5 },
+    },
   },
 
   /* Scene transitions: each section "arrives" with a timed animation (not tied to scroll distance),
