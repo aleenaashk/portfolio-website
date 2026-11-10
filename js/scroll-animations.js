@@ -92,25 +92,6 @@ function initFooterEntrance() {
   playWhenVisible(".site-footer", tl, "top 85%");
 }
 
-/* PHONES + UPRIGHT TABLETS (called from main.js): no pinned scenes, so each piece simply rises in once
-   as it scrolls into view. yPercent (not y) so it never clashes with the cursor push.
-   To reveal something else, add its CSS selector to the list. Bigger number = rises from further down. */
-function initSimpleReveals() {
-  const reveals = [
-    [".projects-title", 40], [".proj", 14],
-    [".about-title span", 60], [".contact-title", 40], [".contact .pill", 80],
-    [".footer-top", 30], [".footer-wordmark", 20],
-  ];
-  reveals.forEach(([selector, rise]) => {
-    gsap.utils.toArray(selector).forEach((el) => {
-      gsap.from(el, {
-        yPercent: rise, opacity: 0, duration: 1, ease: "expo.out", clearProps: "transform,opacity",
-        scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none none" },
-      });
-    });
-  });
-}
-
 /* SNAPPING: when you stop scrolling, glide to the next "scene" in the direction you were going,
    so every section (and every gallery project / About card) sits firmly in place. */
 function initSceneSnapping(projectsST, aboutST, projectCount) {

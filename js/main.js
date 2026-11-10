@@ -26,12 +26,19 @@ document.addEventListener("DOMContentLoaded", () => {
     return () => document.documentElement.classList.remove("motion");
   });
 
-  // Phones and upright tablets: a natural page (see css/responsive.css) with simple rise-in reveals.
+  // Phones and upright tablets: the same scenes as desktop, in a portrait layout (see css/responsive.css).
   // KEEP this query in step with the "compact" media query in css/responsive.css.
   mm.add("(max-width: 700px) and (prefers-reduced-motion: no-preference), (max-aspect-ratio: 5/4) and (prefers-reduced-motion: no-preference)", () => {
+    document.documentElement.classList.add("motion");   // CSS switches to the animated layout (portrait version, see css/responsive.css)
     initHeroEntrance();
     initFindEntrance();   // same word-by-word rise as desktop
-    initSimpleReveals();
+    initProjectsGallery(window.PORTFOLIO_CONFIG.gallery.portrait);
+    initProjectsEntrance();
+    initAboutCards();
+    initContactEntrance();
+    initFooterEntrance();
+    initProjectLinkTransition();
+    return () => document.documentElement.classList.remove("motion");
   });
 
   // Re-measure once fonts and images have loaded

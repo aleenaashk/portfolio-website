@@ -4,8 +4,11 @@
    out from how far it is from the "focused" one (see config.js),
    so adding a project to the HTML needs NO changes here.
 ============================================================ */
-function initProjectsGallery() {
+function initProjectsGallery(opts) {
   const G = window.PORTFOLIO_CONFIG.gallery;
+  // Desktop uses G.layout; phones pass G.portrait ({ layout, scrollPerProject }) from main.js
+  const LAYOUT = (opts && opts.layout) || G.layout;
+  const PER = (opts && opts.scrollPerProject) || G.scrollPerProject;
   const section = document.querySelector(".projects");
   const gallery = section.querySelector(".gallery");
   const items = gsap.utils.toArray(".proj");
@@ -14,7 +17,7 @@ function initProjectsGallery() {
 
   // Where project number i sits when project number `focus` is the focused one
   function stateFor(i, focus) {
-    const d = i - focus, L = G.layout;
+    const d = i - focus, L = LAYOUT;
     const slot = L.positions[d] || (d > 0 ? L.farRight : L.farLeft);
     const y = d === 0 ? L.yFocused : (i % 2 ? L.yHigh : L.yLow); // odd = high, even = low
     return { x: slot.x, y, scale: slot.w / L.focusedWidth };
@@ -27,7 +30,7 @@ function initProjectsGallery() {
     defaults: { ease: "sine.inOut" },
     scrollTrigger: {
       trigger: section, start: "top top", pin: true, scrub: G.scrub, anticipatePin: 1,
-      end: () => "+=" + (n - 1) * G.scrollPerProject * window.innerHeight,
+      end: () => "+=" + (n - 1) * PER * window.innerHeight,
       invalidateOnRefresh: true,   // recalculate pixel positions on resize
     },
   });
