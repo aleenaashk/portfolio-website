@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   mm.add("(max-width: 700px) and (prefers-reduced-motion: no-preference), (max-aspect-ratio: 5/4) and (prefers-reduced-motion: no-preference)", () => {
     document.documentElement.classList.add("motion");   // CSS switches to the animated layout (portrait version, see css/responsive.css)
     initHeroEntrance();
-    initFindEntrance();   // same word-by-word rise as desktop
+    initFindEntrance("top 30%");   // same word-by-word rise as desktop; starts a little earlier so the lower pills are already on screen
     initProjectsGallery(window.PORTFOLIO_CONFIG.gallery.portrait);
     initProjectsEntrance();
     initAboutCards(window.PORTFOLIO_CONFIG.about.portrait);

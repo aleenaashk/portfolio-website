@@ -68,8 +68,8 @@ section { position: relative; }
 .pill:hover { box-shadow: 0 calc(1.2 * var(--vw)) calc(3.5 * var(--vw)) rgba(248, 136, 145, .4); }
 
 /* NAV: sits at the top of the page only (as in your design), not sticky */
-.site-header { position: fixed; z-index: 900;   /* sticky: stays at the top while the page scrolls */ top: calc(3.4 * var(--vw)); left: 50%; width: calc(85.4 * var(--vw)); transform: translateX(-50%); }
-.nav-pill { display: flex; align-items: center; justify-content: space-between; height: max(calc(5.1 * var(--vw)), 3.4rem); padding: 0 calc(2.1 * var(--vw)); background: #fff; border-radius: calc(2.6 * var(--vw)); box-shadow: 0 calc(1.5 * var(--vw)) calc(4 * var(--vw)) var(--glow); }
+.site-header { position: sticky; top: 0; z-index: 900; height: 0; width: calc(85.4 * var(--vw)); margin: 0 auto; }   /* sticky: stays at the top while the page scrolls. height 0 = takes no room in the layout */
+.nav-pill { position: absolute; top: calc(3.4 * var(--vw)); left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; height: max(calc(5.1 * var(--vw)), 3.4rem); padding: 0 calc(2.1 * var(--vw)); background: #fff; border-radius: calc(2.6 * var(--vw)); box-shadow: 0 calc(1.5 * var(--vw)) calc(4 * var(--vw)) var(--glow); }
 .nav-left { display: flex; gap: calc(2.5 * var(--vw)); }
 
 /* WORDMARK (hero + footer). --dx/--dy on each letter come from the HTML.

@@ -32,9 +32,9 @@
     --margin-x: 6vw;
     --size-wordmark: 27vw;              /* aleena sk (fills ~92% of the screen width) */
     --size-heading: 16vw;               /* find what.., my projects, about me */
-    --size-contact: 13.5vw;             /* "have any projects in mind?" (the longer line fills ~90% of the width) */
+    --size-contact: 16vw;               /* "have any / projects in / mind?" (same size as the section headings) */
     --size-project-title: 11vw;         /* title on each project page */
-    --size-small: max(3.7vw, 0.95rem);  /* nav, labels, pills, small text (never under ~15px) */
+    --size-small: 0.85rem;              /* nav, footer, labels, pills: one standard small-text size (13.6px) */
   }
   .stage { width: 100%; height: auto; margin: 0; }
   .hero, .contact { min-height: 0; height: auto; }
@@ -43,8 +43,8 @@
   .pill { width: clamp(8.5rem, 36vw, 15rem); height: clamp(2.75rem, 11vw, 3.5rem); }
 
   /* ---------- NAV: full width pill with roomy tap areas ---------- */
-  .site-header { top: 4vw; left: 4vw; right: 4vw; width: auto; transform: none; }
-  .nav-pill { height: 3.1rem; padding: 0 5vw; border-radius: 1.2rem; font-size: 0.85rem; }   /* standard nav text size */
+  .site-header { width: 100%; margin: 0; }
+  .nav-pill { top: 4vw; left: 4vw; right: 4vw; height: 3.1rem; padding: 0 5vw; border-radius: 1.2rem; font-size: 0.85rem; }   /* standard nav text size */
   .nav-left { gap: 4vw; }
   .nav-pill a { display: inline-block; padding: 0.9rem 0.15rem; font-size: 0.85rem; }
 
@@ -89,7 +89,7 @@
   html.motion .projects { height: 150vw; }
   html.motion .projects .stage { height: 100%; }
   html.motion .projects-title { right: 6vw; top: 8vw; }
-  html.motion .proj-label { font-size: max(3.6vw, 0.9rem); }
+  html.motion .proj-label { font-size: var(--size-small); }
   html.motion .gallery { inset: 30vw 0 0; }
 
   /* ---------- ABOUT (list version, used when animations are off): the cards pile up like paper (pure CSS "sticky") ---------- */
@@ -118,15 +118,16 @@
 
   /* ---------- CONTACT: "have any projects in mind?" is cut into two lines. Each line is its own box
      (.ct-line), so each gets the same white-to-blush gradient, like the words in "find what you're looking for". ---------- */
-  .contact { min-height: 0; padding: 22vw 6vw; }
+  .contact { min-height: 90svh; padding: 18vw 6vw; gap: 6vw; place-content: center; }   /* a whole screen of its own so it is in focus when you reach it */
   .contact-title { font-size: var(--size-contact); background: none; display: grid; justify-items: center; }
   .contact-title .ct-line { display: block; width: max-content; padding: 0 .1em .2em 0; background: var(--blush-gradient-word); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .contact-title .ct-line + .ct-line { margin-top: -.7em; }   /* tight lines, close to the "about me" spacing but still readable */   /* tight, overlapping lines like "about me" */
+  .contact-title .ct-line + .ct-line { margin-top: -.38em; }   /* line spacing taken from your reference image */
 
   /* ---------- FOOTER: same pieces as desktop, stacked for a narrow screen:
      links, then copyright, then the big name (centred, like the hero). ---------- */
   .site-footer { height: auto; min-height: 0; border-radius: 8vw 8vw 0 0; display: block; }
   .site-footer .stage { height: auto; padding-bottom: 8vw; }
+  .footer-top, .footer-top a, .footer-top p { font-size: var(--size-small); }
   .footer-top { flex-direction: column; align-items: flex-start; gap: .6rem; padding: 10vw 7vw 0; }
   .footer-top ul { flex-wrap: wrap; gap: 0 6vw; }
   .footer-top a { display: inline-block; padding: .8rem .1rem; }

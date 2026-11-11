@@ -26,7 +26,7 @@ function initHeroEntrance() {
 }
 
 /* FIND: "find", "what", "you're", "looking", "for" rise in one after another, then pills slide in from the sides */
-function initFindEntrance() {
+function initFindEntrance(start) {   // start: optional ScrollTrigger start (phones start earlier so the lower pills are on screen)
   // Each pill slides in from the side of the screen it sits on. On desktop that is exactly the old behaviour
   // (the two left pills from the left, the two right pills from the right); on phones it keeps the
   // pills above/below the words from coming in "from across the screen".
@@ -37,7 +37,7 @@ function initFindEntrance() {
   tl.from(".fw", { yPercent: 120, opacity: 0, duration: 1.1, stagger: 0.14 })
     .from(leftPills, { xPercent: -120, opacity: 0, duration: 1, stagger: 0.1 }, "-=0.5")
     .from(rightPills, { xPercent: 120, opacity: 0, duration: 1, stagger: 0.1 }, "<");
-  playWhenVisible(".find", tl);
+  playWhenVisible(".find", tl, start);
 }
 
 /* PROJECTS entrance: heading slides in, projects float up one after another (the gallery scroll itself is in projects-gallery.js) */
@@ -86,9 +86,14 @@ function initAboutCards(opts) {
 /* CONTACT: heading rises in, then the button */
 function initContactEntrance() {
   const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
-  tl.from(".contact-title", { yPercent: 60, opacity: 0, duration: 1.1 })
-    .from(".contact .pill", { yPercent: 120, opacity: 0, duration: 0.9 }, "-=0.3");
-  playWhenVisible(".contact", tl);
+  // On phones the heading is three boxes (.ct-line) that rise one after another, like "find what you're looking for".
+  // On desktop the spans are plain inline text, so the whole heading rises as one (unchanged).
+  const lines = gsap.utils.toArray(".contact-title .ct-line");
+  const stacked = lines.length > 0 && getComputedStyle(lines[0]).display === "block";
+  if (stacked) tl.from(lines, { yPercent: 120, opacity: 0, duration: 1.1, stagger: 0.14 });
+  else tl.from(".contact-title", { yPercent: 60, opacity: 0, duration: 1.1 });
+  tl.from(".contact .pill", { yPercent: 120, opacity: 0, duration: 0.9 }, "-=0.3");
+  playWhenVisible(".contact", tl, stacked ? "top 55%" : undefined);
 }
 
 /* FOOTER: the big name rises in letter by letter */
