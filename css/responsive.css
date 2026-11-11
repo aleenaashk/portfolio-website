@@ -44,13 +44,13 @@
 
   /* ---------- NAV: full width pill with roomy tap areas ---------- */
   .site-header { top: 4vw; left: 4vw; right: 4vw; width: auto; transform: none; }
-  .nav-pill { height: 3.4rem; padding: 0 5vw; border-radius: 1.2rem; }
+  .nav-pill { height: 3.1rem; padding: 0 5vw; border-radius: 1.2rem; font-size: 0.85rem; }   /* standard nav text size */
   .nav-left { gap: 4vw; }
-  .nav-pill a { display: inline-block; padding: 0.9rem 0.15rem; }
+  .nav-pill a { display: inline-block; padding: 0.9rem 0.15rem; font-size: 0.85rem; }
 
   /* ---------- HERO: same composition as desktop, in portrait.
      Everything is positioned from the screen height (svh) and width (vw), so it fits any phone. ---------- */
-  .hero .stage { height: 100svh; min-height: 34rem; }
+  .hero .stage { height: 82svh; min-height: 30rem; }
   .hero .wordmark { top: calc(36svh - var(--size-wordmark) * 0.5); padding-right: .13em; }   /* padding-right re-centres the name (the tight letter overlap shifts it right) */
   .hero-role { left: 57vw; right: auto; width: 38vw; white-space: normal; text-align: left; top: calc(36svh + var(--size-wordmark) * 0.66); }   /* two lines (UI/UX & / graphic designer), tucked under the name's right side like desktop */
   .hero-role .role-break { display: inline; }
@@ -62,7 +62,7 @@
 
   /* ---------- FIND: the five words keep the desktop's tight stacking and stagger.
      Each word's left/top come from "em" steps measured on the desktop, so it scales with --size-heading. ---------- */
-  .find { height: auto; min-height: 100svh; display: flex; align-items: center; }
+  .find { height: auto; min-height: 0; padding: 8vw 0; }   /* sections fit their content: no big blank gaps */
   .find .stage { height: 142vw; }
   .find-title { font-size: 19vw; }   /* the five words take up most of the screen, like desktop */
   .fw { padding-bottom: .2em; }
@@ -86,11 +86,11 @@
   /* PROJECTS (animated, like desktop): one pinned screen; the projects glide across as you scroll.
      Positions and sizes come from config.js -> gallery.portrait. */
   html.motion .proj { width: 74%; }   /* must equal gallery.portrait.layout.focusedWidth in config.js */
-  html.motion .projects { height: 100svh; }
-  html.motion .projects .stage { height: 100svh; }
-  html.motion .projects-title { right: 6vw; top: 12vw; }
+  html.motion .projects { height: 150vw; }
+  html.motion .projects .stage { height: 100%; }
+  html.motion .projects-title { right: 6vw; top: 8vw; }
   html.motion .proj-label { font-size: max(3.6vw, 0.9rem); }
-  html.motion .gallery { inset: 28% 0 0; }
+  html.motion .gallery { inset: 30vw 0 0; }
 
   /* ---------- ABOUT (list version, used when animations are off): the cards pile up like paper (pure CSS "sticky") ---------- */
   html:not(.motion) .card-stack { display: block; padding-bottom: 8vh; }
@@ -104,10 +104,10 @@
 
   /* ---------- ABOUT (animated, like desktop): one pinned screen. Title top-left, the three cards stacked below it.
      The card transitions and back-offsets come from config.js -> about. ---------- */
-  html.motion .about { height: 100svh; }
-  html.motion .about .stage { height: 100svh; }
-  html.motion .about-title { left: 7vw; top: 12vw; }
-  html.motion .card-stack { left: 11vw; top: 52vw; width: 78vw; height: 96vw; aspect-ratio: auto; }
+  html.motion .about { height: 150vw; }
+  html.motion .about .stage { height: 100%; }
+  html.motion .about-title { left: 7vw; top: 6vw; }
+  html.motion .card-stack { left: 11vw; top: 40vw; width: 78vw; height: 96vw; aspect-ratio: auto; }
   html.motion .card { padding: 6vw; border-radius: 7vw; box-shadow: 0 4vw 12vw var(--glow); }
   html.motion .card-education, html.motion .card-experience { padding-bottom: 7vw; }
   html.motion .card-hi { font-size: 6vw; }
@@ -118,10 +118,10 @@
 
   /* ---------- CONTACT: "have any projects in mind?" is cut into two lines. Each line is its own box
      (.ct-line), so each gets the same white-to-blush gradient, like the words in "find what you're looking for". ---------- */
-  .contact { min-height: 70svh; padding: 14vw 6vw; }
+  .contact { min-height: 0; padding: 22vw 6vw; }
   .contact-title { font-size: var(--size-contact); background: none; display: grid; justify-items: center; }
   .contact-title .ct-line { display: block; width: max-content; padding: 0 .1em .2em 0; background: var(--blush-gradient-word); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .contact-title .ct-line + .ct-line { margin-top: -.34em; }   /* tight, overlapping lines like "about me" */
+  .contact-title .ct-line + .ct-line { margin-top: -.7em; }   /* tight lines, close to the "about me" spacing but still readable */   /* tight, overlapping lines like "about me" */
 
   /* ---------- FOOTER: same pieces as desktop, stacked for a narrow screen:
      links, then copyright, then the big name (centred, like the hero). ---------- */

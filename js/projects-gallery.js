@@ -29,7 +29,7 @@ function initProjectsGallery(opts) {
   const tl = gsap.timeline({
     defaults: { ease: "sine.inOut" },
     scrollTrigger: {
-      trigger: section, start: "top top", pin: true, scrub: G.scrub, anticipatePin: 1,
+      trigger: section, start: (opts && opts.start) || "top top", pin: true, scrub: G.scrub, anticipatePin: 1,
       end: () => "+=" + (n - 1) * PER * window.innerHeight,
       invalidateOnRefresh: true,   // recalculate pixel positions on resize
     },

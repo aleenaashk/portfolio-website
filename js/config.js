@@ -47,6 +47,7 @@ window.PORTFOLIO_CONFIG = {
     /* PHONES: the same idea in portrait. The focused project is wide; neighbours peek in from the edges.
        focusedWidth must equal the width of "html.motion .proj" inside the phone block of css/responsive.css. */
     portrait: {
+      start: "center center",   // phones: the pinned screen is centred in the window (sections are shorter than the window)
       scrollPerProject: 0.8,
       layout: {
         focusedWidth: 74,
@@ -74,6 +75,7 @@ window.PORTFOLIO_CONFIG = {
     back2: { x: 9.0, y: -9.9, rot: 6 },   // card two steps behind the front
     /* PHONES: the front card is centred, so the cards behind peek out less */
     portrait: {
+      start: "center center",
       back1: { x: 3.5, y: -4.5, rot: 2.5 },
       back2: { x: 7.0, y: -9.0, rot: 5 },
     },

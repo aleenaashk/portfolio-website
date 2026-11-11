@@ -27,10 +27,16 @@ function initHeroEntrance() {
 
 /* FIND: "find", "what", "you're", "looking", "for" rise in one after another, then pills slide in from the sides */
 function initFindEntrance() {
+  // Each pill slides in from the side of the screen it sits on. On desktop that is exactly the old behaviour
+  // (the two left pills from the left, the two right pills from the right); on phones it keeps the
+  // pills above/below the words from coming in "from across the screen".
+  const pills = gsap.utils.toArray(".find-pill");
+  const onLeft = (el) => { const r = el.getBoundingClientRect(); return r.left + r.width / 2 < window.innerWidth / 2; };
+  const leftPills = pills.filter(onLeft), rightPills = pills.filter((el) => !onLeft(el));
   const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
   tl.from(".fw", { yPercent: 120, opacity: 0, duration: 1.1, stagger: 0.14 })
-    .from(".p1, .p2", { xPercent: -120, opacity: 0, duration: 1, stagger: 0.1 }, "-=0.5")
-    .from(".p3, .p4", { xPercent: 120, opacity: 0, duration: 1, stagger: 0.1 }, "<");
+    .from(leftPills, { xPercent: -120, opacity: 0, duration: 1, stagger: 0.1 }, "-=0.5")
+    .from(rightPills, { xPercent: 120, opacity: 0, duration: 1, stagger: 0.1 }, "<");
   playWhenVisible(".find", tl);
 }
 
@@ -56,7 +62,7 @@ function initAboutCards(opts) {
   const tl = gsap.timeline({
     defaults: { ease: "power2.inOut" },
     scrollTrigger: {
-      trigger: ".about", start: "top top", pin: true, scrub: 1, anticipatePin: 1,
+      trigger: ".about", start: A.start || "top top", pin: true, scrub: 1, anticipatePin: 1,
       end: () => "+=" + A.scrollLength * window.innerHeight, invalidateOnRefresh: true,
     },
   });
