@@ -4,6 +4,7 @@
    Make it smaller for a smaller strip. Everything else scales from it.
 ============================================================ */
 .project-carousel {
+  --pc-label: 1.7rem;                                  /* room above the middle card for its title (keeps the card clear of the dots) */
   --pc-w: calc(12.5 * var(--vw));                      /* EDIT: width of the middle card (try 10 for even smaller, 16.9 for the earlier size) */
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 500;
   display: flex; flex-direction: column; align-items: center;
@@ -20,7 +21,7 @@
 .project-carousel .pc-inner, .project-carousel .pc-dots { pointer-events: auto; }
 
 /* The row the cards sit in. Its height = middle card (16:9 image) + its label. */
-.pc-inner { position: relative; width: calc(var(--pc-w) * 3.4); height: calc(var(--pc-w) * .5625 + 2.4 * var(--vw)); touch-action: pan-y; }
+.pc-inner { position: relative; width: calc(var(--pc-w) * 3.4); height: calc(var(--pc-w) * .5625 + var(--pc-label)); touch-action: pan-y; }
 .pc-list { position: relative; margin: 0; padding: 0; list-style: none; height: 100%; }
 
 /* CARDS: all stacked in the middle; the script moves/sizes each one (transform) */
@@ -31,24 +32,15 @@
 }
 .pc-card.is-far { visibility: hidden; pointer-events: none; }
 .pc-card a { display: block; }
-.pc-label { display: block; margin-bottom: .4rem; font-size: max(calc(1.05 * var(--vw)), .8rem); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pc-label { display: block; margin-bottom: .4rem; transition: opacity .4s; font-size: max(calc(1.05 * var(--vw)), .8rem); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* Only the project in focus (the middle one) shows its title; the others stay quiet */
+.pc-card:not(.is-middle) .pc-label { opacity: 0; }
 .pc-img { display: block; aspect-ratio: 16 / 9; background: #f6eef0; border-radius: .4rem; overflow: hidden; box-shadow: 0 1vw 3vw var(--glow); transition: transform .5s cubic-bezier(.2, .7, .2, 1); }
 .pc-img img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .pc-card.is-middle a:hover .pc-img, .pc-card a:focus-visible .pc-img { transform: scale(1.03); }
 
-/* ARROWS: round white buttons either side of the cards */
-.pc-arrow {
-  position: absolute; top: 50%; z-index: 20; display: grid; place-items: center; cursor: pointer; border: 0; color: var(--grey);
-  width: max(calc(3.2 * var(--vw)), 2.75rem); height: max(calc(3.2 * var(--vw)), 2.75rem);   /* never under 44px */
-  background: #fff; border-radius: 50%; box-shadow: 0 1vw 3vw var(--glow); transition: box-shadow .3s, opacity .3s;
-}
-.pc-prev { left: calc(50% - var(--pc-w) * 1.62); translate: -50% -50%; }
-.pc-next { left: calc(50% + var(--pc-w) * 1.62); translate: -50% -50%; }
-.pc-arrow:hover { box-shadow: 0 1vw 3vw rgba(248, 136, 145, .4); }
-.pc-arrow:disabled { opacity: .35; cursor: default; box-shadow: none; }
-
-/* DOTS: one per project; the filled one is the middle project */
-.pc-dots { display: flex; gap: .1rem; margin-top: calc(.4 * var(--vw)); }
+/* DOTS: one per project; the filled one is the middle project. (No arrows: use the dots, swipe, or tap a side card.) */
+.pc-dots { display: flex; gap: .1rem; margin-top: .6rem; }
 .pc-dot { display: grid; place-items: center; width: 1.5rem; height: 1.5rem; padding: 0; border: 0; background: none; cursor: pointer; }
 .pc-dot::before { content: ""; width: .55rem; height: .55rem; border-radius: 50%; background: #f3c3cb; transition: background .3s, transform .3s; }
 .pc-dot[aria-current="true"]::before { background: #d4607a; transform: scale(1.2); }
@@ -61,8 +53,9 @@
   .project-carousel { --pc-w: 38vw; padding-top: 5vw; padding-bottom: 2vw; }
   .pc-inner { width: 100%; }
   .pc-label { font-size: .8rem; }
-  .pc-prev { left: 3vw; translate: 0 -50%; }
-  .pc-next { left: auto; right: 3vw; translate: 0 -50%; }
+  .pc-dots { margin-top: .4rem; }
+  .pc-dot { width: 2.75rem; height: 2.75rem; }          /* comfortable 44px+ tap targets */
+  .pc-dot::before { width: .5rem; height: .5rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .project-carousel, .pc-card, .pc-img, .pc-dot::before { transition: none; }
